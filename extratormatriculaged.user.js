@@ -114,7 +114,7 @@ async function coletarDadosAlunos(vetAluno) {
         // Adiciona um tempo de 10ms antes de executar o clique
         setTimeout(function() {
             document.getElementsByName('BCONSULTAR')[0].click();
-        }, 10);
+        }, 50);
 
         try {
             let matCodAtual = await esperarCarregarElemento("span_vGEDMATCOD_0001", matCodAntigo);
