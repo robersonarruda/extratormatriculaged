@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Extrator Dados Matrícula
-// @version       1.1.0
+// @version       1.3.0
 // @description   Consulta e salva dados de contato dos alunos do sigeduca.
 // @author        Roberson Arruda
 // @match	      https://*.seduc.mt.gov.br/ged/hwmgedmanutencaomatricula.aspx*
@@ -81,18 +81,10 @@ function saveTextAsFile() {
     document.body.removeChild(a);
 }
 
-//INICIAR
-function coletar()
-{
-    n=0;
+async function coletarDadosAlunos(vetAluno) {
     vetAluno = [0];
     vetAluno = txtareaAluno.value.match(/[0-9]+/g).filter(Boolean);
-    a = "";
-    txtareaDados.value ="";
-    coletarDadosAlunos(vetAluno);
-}
 
-async function coletarDadosAlunos(vetAluno) {
     let matCodAntigo = "0"; // Inicializa com "0"
     txtareaDados.value = "Código; Nome do Aluno; Matriz; Turma; Rede de Origem; Observação\n";
 
@@ -119,7 +111,10 @@ async function coletarDadosAlunos(vetAluno) {
         let codigo = vetAluno[i];
         document.getElementById('vGEDALUCOD').value = codigo;
         document.getElementById('vGEDALUCOD').onblur();
-        document.getElementsByName('BCONSULTAR')[0].click();
+        // Adiciona um tempo de 10ms antes de executar o clique
+        setTimeout(function() {
+            document.getElementsByName('BCONSULTAR')[0].click();
+        }, 10);
 
         try {
             let matCodAtual = await esperarCarregarElemento("span_vGEDMATCOD_0001", matCodAntigo);
@@ -201,7 +196,7 @@ btnColetar1.setAttribute('name','btnColetar1');
 btnColetar1.setAttribute('value','Extrair dados Matricula"');
 btnColetar1.setAttribute('class','botaoSCT');
 divCredit.appendChild(btnColetar1);
-btnColetar1.onclick = function(){coletar()};
+btnColetar1.onclick = function(){coletarDadosAlunos(vetAluno);};
 
 //QUEBRA LINHA
 var quebraLinha1 = document.createElement("br");
