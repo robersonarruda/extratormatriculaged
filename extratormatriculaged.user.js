@@ -86,6 +86,7 @@ async function coletarDadosAlunos(vetAluno) {
     vetAluno = txtareaAluno.value.match(/[0-9]+/g).filter(Boolean);
 
     let matCodAntigo = "0"; // Inicializa com "0"
+    let nomeAntigo = "0";
     txtareaDados.value = "Código; Nome do Aluno; Matriz; Turma; Rede de Origem; Observação\n";
 
     function esperarCarregarElemento(idElemento, valorAntigo, tentativas = 20, intervalo = 100) {
@@ -118,18 +119,19 @@ async function coletarDadosAlunos(vetAluno) {
 
         try {
             let matCodAtual = await esperarCarregarElemento("span_vGEDMATCOD_0001", matCodAntigo);
+            let nomeAtual = await esperarCarregarElemento("span_vGEDMATCOD_0001", nomeAntigo);
             let nomeAluno = document.getElementById("span_vGEDALUNOM")?.innerText || "N/A";
             let matrizTurma = document.getElementById("span_vGRIDGEDMATDISCGERMATMSC_0001")?.innerText || "N/A";
             let turmaAluno = document.getElementById("span_vGERTURSAL_0001")?.innerText || "N/A"
             let selectElem = document.getElementById("vGEDMATTIPOORIGEMMAT_0001");
             let tipoOrigemMat = selectElem ? selectElem.options[selectElem.selectedIndex]?.text || "N/A" : "N/A";
-            txtareaDados.value += `${codigo}; ${nomeAluno}; ${matrizTurma}; ${turmaAluno}; ${tipoOrigemMat}\n`;
+            txtareaDados.value += `${codigo.trim()}; ${nomeAluno.trim()}; ${matrizTurma.trim()}; ${turmaAluno.trim()}; ${tipoOrigemMat.trim()}\n`;
 
             matCodAntigo = matCodAtual; // Atualiza o código para próxima verificação
         } catch (error) {
             console.error(error);
             let nomeAluno = document.getElementById("span_vGEDALUNOM")?.innerText || "N/A";
-            txtareaDados.value += `${codigo}; ${nomeAluno}; N/A; N/A; N/A; Aluno não matriculado ou código inexistente, verifique\n`;
+            txtareaDados.value += `${codigo.trim()}; ${nomeAluno.trim()}; N/A; N/A; N/A; Aluno não matriculado ou código inexistente, verifique\n`;
         }
     }
 
