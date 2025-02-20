@@ -1,11 +1,8 @@
 // ==UserScript==
 // @name          Extrator Dados Matrícula
-// @version       1.0.0
+// @version       1.1.0
 // @description   Consulta e salva dados de contato dos alunos do sigeduca.
 // @author        Roberson Arruda
-// @updateURL    https://github.com/robersonarruda/extratormatriculaged/raw/refs/heads/main/extratormatriculaged.user.js
-// @downloadURL   https://github.com/robersonarruda/extratormatriculaged/raw/refs/heads/main/extratormatriculaged.user.js
-
 // @match	      https://*.seduc.mt.gov.br/ged/hwmgedmanutencaomatricula.aspx*
 // @match	      http://*.seduc.mt.gov.br/ged/hwmgedmanutencaomatricula.aspx*
 // @copyright     2025, Roberson Arruda (robersonarruda@outlook.com)
@@ -97,7 +94,7 @@ function coletar()
 
 async function coletarDadosAlunos(vetAluno) {
     let matCodAntigo = "0"; // Inicializa com "0"
-    txtareaDados.value = "Código; Nome do Aluno; Matriz; Turma; Rede de Origem\n";
+    txtareaDados.value = "Código; Nome do Aluno; Matriz; Turma; Rede de Origem; Observação\n";
 
     function esperarCarregarElemento(idElemento, valorAntigo, tentativas = 20, intervalo = 100) {
         return new Promise((resolve, reject) => {
@@ -136,6 +133,8 @@ async function coletarDadosAlunos(vetAluno) {
             matCodAntigo = matCodAtual; // Atualiza o código para próxima verificação
         } catch (error) {
             console.error(error);
+            let nomeAluno = document.getElementById("span_vGEDALUNOM")?.innerText || "N/A";
+            txtareaDados.value += `${codigo}; ${nomeAluno}; N/A; N/A; N/A; Aluno não matriculado ou código inexistente, verifique\n`;
         }
     }
 
