@@ -3,6 +3,9 @@
 // @version       1.0.0
 // @description   Consulta e salva dados de contato dos alunos do sigeduca.
 // @author        Roberson Arruda
+// @updateURL    https://github.com/robersonarruda/extratormatriculaged/raw/refs/heads/main/extratormatriculaged.user.js
+// @downloadURL   https://github.com/robersonarruda/extratormatriculaged/raw/refs/heads/main/extratormatriculaged.user.js
+
 // @match	      https://*.seduc.mt.gov.br/ged/hwmgedmanutencaomatricula.aspx*
 // @match	      http://*.seduc.mt.gov.br/ged/hwmgedmanutencaomatricula.aspx*
 // @copyright     2025, Roberson Arruda (robersonarruda@outlook.com)
