@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Extrator Dados Matrícula
-// @version       1.3.0
+// @version       1.4.0
 // @description   Consulta e salva dados de contato dos alunos do sigeduca.
 // @author        Roberson Arruda
 // @match	      https://*.seduc.mt.gov.br/ged/hwmgedmanutencaomatricula.aspx*
