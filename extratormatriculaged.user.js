@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Extrator Dados Matrícula
-// @version       1.4.0
+// @version       1.4.1
 // @description   Consulta e salva dados de contato dos alunos do sigeduca.
 // @author        Roberson Arruda
 // @match	      https://*.seduc.mt.gov.br/ged/hwmgedmanutencaomatricula.aspx*
@@ -119,7 +119,7 @@ async function coletarDadosAlunos(vetAluno) {
 
         try {
             let matCodAtual = await esperarCarregarElemento("span_vGEDMATCOD_0001", matCodAntigo);
-            let nomeAtual = await esperarCarregarElemento("span_vGEDMATCOD_0001", nomeAntigo);
+            let nomeAtual = await esperarCarregarElemento("span_vGEDALUNOM", nomeAntigo);
             let nomeAluno = document.getElementById("span_vGEDALUNOM")?.innerText || "N/A";
             let matrizTurma = document.getElementById("span_vGRIDGEDMATDISCGERMATMSC_0001")?.innerText || "N/A";
             let turmaAluno = document.getElementById("span_vGERTURSAL_0001")?.innerText || "N/A"
